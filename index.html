@@ -1,0 +1,31 @@
+
+<img id="image" src="chaptcha.php?char=3,4,5,t,r,d" />
+<button id="button">refresh</button></body>
+<br/>
+<input type="text" id="chaptcha" />
+<button id="chk">Submit</button>
+<script
+src="https://code.jquery.com/jquery-2.2.4.min.js"
+integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+crossorigin="anonymous"></script>
+<script>
+    $('#button').click(function() {
+        getChp()
+    });
+$('#chk').click(function() {
+    var chaptcha = $("#chaptcha").val();
+    if(chaptcha=="345trd"){
+        alert("success");
+    }else{
+        alert("try again");
+        getChp();
+    }
+});
+
+function getChp(){
+    var $image = $('#image');
+    var plainSrc = $image.attr('src').split("?")[0];  // disregard previous query string
+    console.log(plainSrc);
+    $image.attr('src', plainSrc + "?char=3,4,5,t,r,d&t=" + (new Date().getTime()));
+}
+</script>
