@@ -9,12 +9,20 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"
 integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
 crossorigin="anonymous"></script>
 <script>
+    var rand = "";
     $('#button').click(function() {
-        getChp()
+        getChp();
     });
 $('#chk').click(function() {
+    var chk = rand.replace(",", "");
+    for(i=0;i<4;i++){
+        chk = chk.replace(",", "");
+        chk = chk.replace(",", "");
+        chk = chk.replace(",", "");
+        chk = chk.replace(",", "");
+    }
     var chaptcha = $("#chaptcha").val();
-    if(chaptcha=="345trd"){
+    if(chaptcha==chk){
         alert("success");
     }else{
         alert("try again");
@@ -23,9 +31,23 @@ $('#chk').click(function() {
 });
 
 function getChp(){
+    rand = makeid();
+    console.log(rand);
     var $image = $('#image');
     var plainSrc = $image.attr('src').split("?")[0];  // disregard previous query string
-    console.log(plainSrc);
-    $image.attr('src', plainSrc + "?char=3,4,5,t,r,d&t=" + (new Date().getTime()));
+    $image.attr('src', plainSrc + "?char="+rand+"&t=" + (new Date().getTime()));
+    $("#chaptcha").val("");
+}
+
+function makeid() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (var i = 0; i < 6; i++)
+    if(i==5){
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }else{
+        text += possible.charAt(Math.floor(Math.random() * possible.length))+",";
+    }
+  return text;
 }
 </script>
