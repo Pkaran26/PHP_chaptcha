@@ -1,4 +1,3 @@
-
 <img id="image" src="chaptcha.php?char=3,4,5,t,r,d" />
 <button id="button">refresh</button></body>
 <br/>
@@ -16,9 +15,6 @@ crossorigin="anonymous"></script>
 $('#chk').click(function() {
     var chk = rand.replace(",", "");
     for(i=0;i<4;i++){
-        chk = chk.replace(",", "");
-        chk = chk.replace(",", "");
-        chk = chk.replace(",", "");
         chk = chk.replace(",", "");
     }
     var chaptcha = $("#chaptcha").val();
@@ -50,4 +46,5 @@ function makeid() {
     }
   return text;
 }
+getChp();
 </script>
